@@ -1,9 +1,10 @@
 from config import Config
-from scheduler import Scheduler
+from scheduler.scheduler import Scheduler
 from github_client import GitHubClient
 from notifier import Notifier
 from report_generator import ReportGenerator
 from subscription_manager import SubscriptionManager
+
 
 def main():
     config = Config()
@@ -17,10 +18,10 @@ def main():
         notifier=notifier,
         report_generator=report_generator,
         subscription_manager=subscription_manager,
-        interval=config.update_interval
+        interval=config.update_interval,
     )
-
     scheduler.start()
+
 
 if __name__ == "__main__":
     main()

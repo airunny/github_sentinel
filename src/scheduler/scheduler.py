@@ -1,8 +1,11 @@
 import time
 import threading
 
+
 class Scheduler:
-    def __init__(self, github_client, notifier, report_generator, subscription_manager, interval):
+    def __init__(
+        self, github_client, notifier, report_generator, subscription_manager, interval
+    ):
         self.github_client = github_client
         self.notifier = notifier
         self.report_generator = report_generator
@@ -16,6 +19,8 @@ class Scheduler:
 
     def run(self):
         subscriptions = self.subscription_manager.get_subscriptions()
+        print("订阅内容:", subscriptions)
         updates = self.github_client.fetch_updates(subscriptions)
+        print("更新信息：", updates)
         report = self.report_generator.generate(updates)
         self.notifier.notify(report)
